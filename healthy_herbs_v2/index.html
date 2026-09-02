@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthy Herbs · Herbario de Tingo María</title>
+<meta name="description" content="Healthy Herbs: álbum de recetas y saberes tradicionales de plantas de la selva alta de Tingo María.">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Parisienne&display=swap');
+
+:root{
+  --pink:#e7c7c6;
+  --pink-light:#f4e3e0;
+  --sage:#b7c7ad;
+  --sage-light:#dce4d4;
+  --green:#6d856f;
+  --green-dark:#23473a;
+  --green-deep:#17372d;
+  --vanilla:#f5efd9;
+  --cream:#fbf6e9;
+  --beige:#e7dcc6;
+  --gold:#b59a64;
+  --gold-light:#d7c38e;
+  --rosewood:#754846;
+  --gray-green:#89948a;
+  --white:#fffdf8;
+  --ink:#294238;
+  --shadow:0 22px 55px rgba(35,71,58,.16);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 10% 15%,rgba(231,199,198,.45),transparent 27%),
+    radial-gradient(circle at 92% 18%,rgba(183,199,173,.45),transparent 29%),
+    linear-gradient(180deg,var(--cream),#f0eadb 55%,var(--cream));
+  font-family:"Gotham","DM Sans",Arial,sans-serif;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{
+  font-family:"Perandory","Cormorant Garamond",Georgia,serif;
+}
+.script{font-family:"Amiable Song","Parisienne",cursive}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
+
+.fog{
+  position:fixed;z-index:0;pointer-events:none;left:-15%;right:-15%;bottom:-8%;
+  height:42vh;
+  background:
+   radial-gradient(ellipse at 18% 60%,rgba(255,255,255,.78),transparent 42%),
+   radial-gradient(ellipse at 50% 38%,rgba(255,255,255,.60),transparent 40%),
+   radial-gradient(ellipse at 84% 60%,rgba(255,255,255,.72),transparent 43%);
+  filter:blur(20px);
+  animation:fog 18s ease-in-out infinite alternate;
+}
+@keyframes fog{from{transform:translateX(-2%)}to{transform:translateX(2%)}}
+
+.leaf-decoration{
+  position:absolute;width:120px;height:58px;border:2px solid currentColor;
+  border-radius:100% 0 100% 0;opacity:.25;transform:rotate(-28deg)
+}
+.leaf-decoration:after{
+  content:"";position:absolute;left:50%;top:4%;height:92%;border-left:2px solid currentColor;
+  transform:rotate(23deg)
+}
+.flower{
+  position:absolute;font-size:44px;opacity:.32;filter:sepia(.25);
+  animation:float 6s ease-in-out infinite;
+}
+@keyframes float{50%{transform:translateY(-10px) rotate(4deg)}}
+
+header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(251,246,233,.80);backdrop-filter:blur(17px);
+  border-bottom:1px solid rgba(35,71,58,.13)
+}
+nav{
+  max-width:1220px;margin:auto;padding:12px 24px;display:flex;
+  align-items:center;justify-content:space-between;gap:24px
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--green-dark)}
+.brand img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:1px solid var(--gold)}
+.nav{display:flex;gap:22px;font-size:.82rem}
+.nav a{opacity:.76;transition:.2s}
+.nav a:hover{opacity:1;color:var(--rosewood)}
+.menu{display:none;border:0;background:transparent;color:var(--green-dark);font-size:1.6rem}
+
+main{position:relative;z-index:2}
+section{max-width:1220px;margin:auto;padding:110px 24px}
+.eyebrow{
+  text-transform:uppercase;letter-spacing:.20em;font-size:.72rem;
+  color:var(--rosewood);font-weight:700
+}
+.title{font-size:clamp(2.8rem,6vw,5.4rem);line-height:.9;color:var(--green-deep);margin:10px 0 20px}
+.copy{max-width:720px;color:#5d6f66}
+.divider{display:flex;align-items:center;gap:10px;margin:18px 0;color:var(--gold)}
+.divider:before,.divider:after{content:"";height:1px;background:var(--gold);width:45px}
+
+.hero{
+  min-height:100vh;padding-top:145px;display:grid;grid-template-columns:1fr .95fr;
+  gap:70px;align-items:center
+}
+.hero h1{font-size:clamp(5rem,10vw,9rem);line-height:.72;margin:12px 0;color:var(--green-dark)}
+.hero h1 small{display:block;font-size:.30em;line-height:1.3;color:var(--rosewood);margin-top:34px}
+.hero .script{font-size:2rem;color:var(--rosewood);margin:18px 0}
+.hero p{font-size:1.03rem;max-width:650px}
+.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{
+  padding:13px 20px;border-radius:999px;border:1px solid var(--green-dark);
+  font-size:.8rem;font-weight:700;letter-spacing:.05em;transition:.22s
+}
+.btn.primary{background:var(--green-dark);color:var(--white);box-shadow:0 12px 28px rgba(23,55,45,.18)}
+.btn.secondary{background:rgba(255,253,248,.45)}
+.btn:hover{transform:translateY(-3px)}
+
+.hero-art{position:relative;display:flex;justify-content:center}
+.hero-art:before{
+  content:"";position:absolute;inset:4%;border-radius:50%;
+  background:radial-gradient(circle,var(--sage-light),rgba(183,199,173,.15) 60%,transparent 72%);
+  filter:blur(5px)
+}
+.hero-album{
+  position:relative;width:min(100%,500px);border:9px solid rgba(255,253,248,.88);
+  border-radius:28px;box-shadow:var(--shadow);transform:rotate(1.5deg)
+}
+.logo-card{
+  position:absolute;left:-20px;bottom:18px;width:145px;padding:9px;
+  background:rgba(255,253,248,.93);border:1px solid var(--gold);
+  box-shadow:0 12px 35px rgba(35,71,58,.15);transform:rotate(-7deg)
+}
+.logo-card img{display:block;border-radius:8px}
+.seal{
+  position:absolute;right:-14px;top:16px;width:108px;height:108px;border:1px solid var(--gold);
+  border-radius:50%;background:rgba(245,239,217,.91);display:grid;place-items:center;text-align:center;
+  font-family:"Cormorant Garamond",serif;color:var(--rosewood);font-size:.82rem;transform:rotate(9deg)
+}
+
+.paper{
+  background:rgba(255,253,248,.72);border:1px solid rgba(35,71,58,.12);
+  border-radius:28px;box-shadow:var(--shadow);padding:34px;position:relative;overflow:hidden
+}
+.paper:before{
+  content:"";position:absolute;inset:12px;border:1px dashed rgba(181,154,100,.48);
+  border-radius:20px;pointer-events:none
+}
+
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:55px;align-items:center}
+.about-img{width:100%;border-radius:22px;box-shadow:var(--shadow)}
+.team{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:25px}
+.person{
+  padding:13px 15px;background:rgba(231,199,198,.28);
+  border-left:3px solid var(--gold);font-size:.82rem
+}
+.person strong{display:block;color:var(--green-dark)}
+
+.product{display:grid;grid-template-columns:.8fr 1.2fr;gap:55px;align-items:center}
+.product-cover{width:100%;border-radius:22px;box-shadow:var(--shadow);border:8px solid var(--white)}
+.recipe-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:25px}
+.recipe{
+  background:rgba(220,228,212,.57);border:1px solid rgba(35,71,58,.12);
+  border-radius:18px;padding:18px;transition:.25s
+}
+.recipe:hover{transform:translateY(-4px);background:rgba(231,199,198,.36)}
+.recipe h3{font-size:1.6rem;color:var(--rosewood);margin:0 0 4px}
+.recipe p{font-size:.78rem;margin:0;color:#596b62}
+.promo{
+  margin-top:20px;background:var(--rosewood);color:#fff8ed;padding:20px;
+  border-radius:18px;box-shadow:0 14px 30px rgba(117,72,70,.20)
+}
+.promo strong{color:#f2dca6}
+
+.gallery-intro{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:32px}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.plant{
+  position:relative;min-height:320px;overflow:hidden;border-radius:24px;
+  background:var(--sage);box-shadow:0 14px 36px rgba(35,71,58,.14)
+}
+.plant img{width:100%;height:100%;min-height:320px;object-fit:cover;display:block;transition:.55s}
+.plant:after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(23,55,45,.88),rgba(23,55,45,.04) 62%)
+}
+.plant:hover img{transform:scale(1.05)}
+.plant-info{position:absolute;left:19px;right:19px;bottom:17px;z-index:2;color:white}
+.plant-info .latin{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:.92rem;opacity:.8}
+.plant-info h3{font-size:2rem;line-height:.9;margin:4px 0}
+.plant-info p{font-size:.74rem;margin:0;opacity:.9}
+.source{
+  display:inline-block;margin-top:8px;font-size:.63rem;opacity:.72;
+  text-decoration:underline
+}
+
+
+.catalogo{background:linear-gradient(135deg,rgba(245,239,217,.78),rgba(220,228,212,.45));border-top:1px solid rgba(181,154,100,.25);border-bottom:1px solid rgba(181,154,100,.25)}
+.catalogo-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:30px}
+.insignia{width:105px;height:105px;object-fit:cover;border-radius:50%;background:#fffdf8;padding:6px;border:2px solid var(--gold);box-shadow:0 10px 24px rgba(35,71,58,.14);flex:none}
+.catalogo-layout{display:grid;grid-template-columns:.95fr 1.05fr;gap:30px;align-items:center}
+.catalogo-cover{width:100%;border-radius:22px;border:8px solid var(--white);box-shadow:var(--shadow);display:block}
+.catalogo-cards{display:grid;grid-template-columns:1fr;gap:14px}
+.catalogo-card{background:rgba(255,253,248,.78);border:1px solid rgba(35,71,58,.12);border-radius:18px;padding:18px 20px;box-shadow:0 8px 22px rgba(35,71,58,.07)}
+.catalogo-card h3{font-size:1.55rem;color:var(--rosewood);margin:0 0 7px}
+.catalogo-card p{font-size:.78rem;margin:5px 0;color:#596b62}
+.catalogo-card ul{margin:9px 0 0 18px;padding:0;font-size:.75rem;color:#596b62;line-height:1.6}
+.catalogo-tag{display:inline-block;padding:5px 9px;border-radius:999px;background:var(--pink-light);color:var(--rosewood);font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.catalogo-note{margin-top:18px;padding:15px 17px;border-left:4px solid var(--gold);background:rgba(231,199,198,.25);border-radius:12px;font-size:.76rem;color:#5c6860}
+@media(max-width:900px){.catalogo-layout{grid-template-columns:1fr}.catalogo-head{align-items:center}.insignia{width:88px;height:88px}}
+@media(max-width:580px){.catalogo-head{display:flex;align-items:flex-start}.insignia{width:70px;height:70px}.catalogo-card h3{font-size:1.4rem}}
+
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.contact-card{
+  padding:28px;border-radius:24px;background:rgba(220,228,212,.48);
+  border:1px solid rgba(35,71,58,.12)
+}
+.contact-card h3{margin:0 0 12px;color:var(--rosewood);font-size:1.9rem}
+.contact-card p{margin:7px 0}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px}
+.pill{padding:10px 14px;background:var(--white);border:1px solid rgba(181,154,100,.42);border-radius:13px;font-size:.78rem}
+.social{
+  display:inline-flex;align-items:center;gap:8px;margin:6px 6px 0 0;
+  padding:10px 14px;border-radius:999px;background:var(--green-dark);color:white;font-size:.76rem
+}
+
+footer{
+  position:relative;z-index:2;background:var(--green-deep);color:#eee6d4;padding:55px 24px 35px
+}
+.footer-inner{max-width:1220px;margin:auto;display:flex;justify-content:space-between;gap:30px;align-items:end}
+.footer-title{font-family:"Perandory","Cormorant Garamond",serif;font-size:3rem}
+.footer .script{font-size:1.5rem;color:#e7c7c6}
+.note{max-width:760px;font-size:.68rem;opacity:.64;margin-top:15px;line-height:1.6}
+
+@media(max-width:900px){
+  .nav{display:none}.menu{display:block}
+  .hero,.about,.product{grid-template-columns:1fr}
+  .hero{padding-top:135px}
+  .hero-art{order:-1}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:580px){
+  section{padding:82px 16px}
+  nav{padding:10px 16px}
+  .hero h1{font-size:5rem}
+  .paper{padding:22px}
+  .team,.recipe-grid,.contact-grid,.gallery-grid{grid-template-columns:1fr}
+  .gallery-intro{display:block}
+  .logo-card{left:0;width:115px}
+  .seal{width:88px;height:88px;font-size:.68rem}
+  .footer-inner{display:block}
+}
+</style>
+</head>
+
+<body>
+<div class="fog"></div>
+<div class="flower" style="left:3%;top:23%;color:#754846">✿</div>
+<div class="flower" style="right:4%;top:41%;color:#6d856f">❀</div>
+<div class="leaf-decoration" style="left:-25px;top:62%;color:#23473a"></div>
+<div class="leaf-decoration" style="right:-25px;top:76%;color:#754846;transform:rotate(145deg)"></div>
+
+<header>
+<nav>
+  <a class="brand" href="#inicio">
+    <img src="assets/logo-healthy-herbs.jpg" alt="Logo Healthy Herbs">
+    <span>Healthy Herbs</span>
+  </a>
+  <div class="nav" id="nav">
+    <a href="#nosotros">Nosotros</a>
+    <a href="#producto">Álbum</a>
+    <a href="#catalogo">Catálogo</a>
+    <a href="#galeria">Herbario</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <button class="menu" aria-label="Abrir menú" onclick="toggleMenu()">☰</button>
+</nav>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div>
+    <div class="eyebrow">Herbario · Selva alta · Tingo María</div>
+    <h1>Healthy Herbs<small>saberes que florecen</small></h1>
+    <div class="script">“Cada hoja guarda una historia; cada receta, una tradición.”</div>
+    <p>
+      Descubre nuestro álbum de recetas y conocimientos tradicionales sobre plantas de la selva alta
+      de Tingo María, creado para aprender, valorar y compartir la riqueza de nuestra naturaleza.
+    </p>
+    <div class="buttons">
+      <a class="btn primary" href="#producto">Descubrir el álbum</a>
+      <a class="btn secondary" href="#galeria">Ver el herbario</a>
+    </div>
+  </div>
+
+  <div class="hero-art">
+    <img class="hero-album" src="assets/album-recetas.png" alt="Álbum de recetas con plantas medicinales Healthy Herbs">
+    <div class="logo-card"><img src="assets/logo-healthy-herbs.jpg" alt="Logo Healthy Herbs"></div>
+    <div class="seal">✦<br>HECHO CON<br>NATURALEZA<br>✦</div>
+  </div>
+</section>
+
+<section id="nosotros">
+  <div class="about">
+    <div class="paper">
+      <img class="about-img" src="assets/album-recetas.png" alt="Ilustración floral del álbum Healthy Herbs">
+    </div>
+    <div>
+      <div class="eyebrow">Acerca de nosotros</div>
+      <h2 class="title">Una idea que echó raíces.</h2>
+      <p class="copy">
+        Somos un equipo escolar que quiso transformar la curiosidad por las plantas en una experiencia
+        visual, educativa y cercana. Healthy Herbs reúne recetas, información botánica y saberes
+        tradicionales para valorar la biodiversidad de nuestra región.
+      </p>
+      <div class="divider">✦</div>
+      <div class="team">
+        <div class="person"><strong>Itzhel Rihanna Delgado Martel</strong></div>
+        <div class="person"><strong>Salva Jara Mishell Camila</strong></div>
+        <div class="person"><strong>Ariadnny Vidal Romayna Bryanna</strong></div>
+        <div class="person"><strong>Marzela Luciana del Águila Shupingahua</strong></div>
+        <div class="person"><strong>García Dávila Thiago Romeo</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="producto">
+  <div class="product">
+    <div>
+      <img class="product-cover" src="assets/album-recetas.png" alt="Portada del álbum de recetas Healthy Herbs">
+    </div>
+    <div>
+      <div class="eyebrow">Producto · Nuestro álbum</div>
+      <h2 class="title">Una pequeña biblioteca verde.</h2>
+      <p class="copy">
+        Nuestro álbum contiene una guía de recetas para preparar remedios tradicionales con plantas
+        de la selva alta de Tingo María. Cada receta incluye advertencias, pasos, información de la
+        planta y una referencia de dónde crece.
+      </p>
+
+      <div class="recipe-grid">
+        <article class="recipe">
+          <h3>Hierba Luisa</h3>
+          <p>Conoce su aroma, su presencia en la tradición y la receta incluida en nuestro álbum.</p>
+        </article>
+        <article class="recipe">
+          <h3>Matico</h3>
+          <p>Descubre esta planta de tradición amazónica y la información que acompaña su ficha.</p>
+        </article>
+        <article class="recipe">
+          <h3>Uña de gato</h3>
+          <p>Explora esta liana amazónica, su entorno y las advertencias presentadas en la guía.</p>
+        </article>
+        <article class="recipe">
+          <h3>Sangre de grado</h3>
+          <p>Conoce esta especie amazónica y el contexto tradicional que presenta nuestro álbum.</p>
+        </article>
+      </div>
+
+      <div class="promo">
+        <strong>🌿 Una probadita de nuestra colección:</strong><br>
+        Elige una planta, abre su ficha y déjate llevar por su historia, su hábitat y la receta
+        tradicional que hemos preparado para nuestro proyecto.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="catalogo" id="catalogo">
+  <div class="catalogo-head">
+    <div>
+      <div class="eyebrow">Catálogo · Nuevas colecciones</div>
+      <h2 class="title">Más historias que queremos compartir.</h2>
+      <p class="copy">Además de nuestro álbum principal, presentamos nuevas propuestas inspiradas en ingredientes y plantas de nuestra región.</p>
+    </div>
+    <img class="insignia" src="assets/insignia-fe-y-alegria.jpg" alt="Insignia de Sagrada Familia Fe y Alegría N° 64">
+  </div>
+
+  <div class="catalogo-layout">
+    <div>
+      <img class="catalogo-cover" src="assets/catalogo-portadas.jpeg" alt="Portadas del catálogo de Infusiones de Cacao Medicinal y Guía de Ungüentos y Bálsamos Naturales">
+      <div class="catalogo-note"><strong>🌿 Colecciones Healthy Herbs:</strong> propuestas de bebidas tradicionales y productos de cuidado externo. El contenido se presenta con fines educativos y culturales.</div>
+    </div>
+
+    <div class="catalogo-cards">
+      <article class="catalogo-card">
+        <span class="catalogo-tag">Colección 01 · Bebidas</span>
+        <h3>Infusiones de Cacao Medicinal</h3>
+        <p><strong>Tipos de cacao:</strong> criollo fino de aroma, cacao chuncho y cacao amazónico.</p>
+        <p><strong>Recetas principales:</strong></p>
+        <ul>
+          <li>Infusión de cacao con muña.</li>
+          <li>Cacao con hierba luisa y canela.</li>
+          <li>Cacao con chuchuhuasi y miel.</li>
+        </ul>
+        <p><strong>Enfoque:</strong> bebidas calientes y frías que combinan cacao con hierbas locales.</p>
+      </article>
+
+      <article class="catalogo-card">
+        <span class="catalogo-tag">Colección 02 · Tradición peruana</span>
+        <h3>Álbum de Recetas para Emolientes</h3>
+        <p><strong>Plantas y semillas:</strong> linaza, cola de caballo, boldo, muña y hierba luisa.</p>
+        <p><strong>Recetas principales:</strong></p>
+        <ul>
+          <li>Emoliente clásico con linaza y cola de caballo.</li>
+          <li>Emoliente digestivo con boldo y muña.</li>
+          <li>Emoliente refrescante con hierba luisa y limón.</li>
+        </ul>
+        <p><strong>Enfoque:</strong> bebidas tradicionales peruanas con un giro moderno para ferias y actividades locales.</p>
+      </article>
+
+      <article class="catalogo-card">
+        <span class="catalogo-tag">Colección 03 · Cuidado externo</span>
+        <h3>Guía de Ungüentos y Bálsamos Naturales</h3>
+        <p><strong>Plantas:</strong> sábila, eucalipto, matico y sangre de grado.</p>
+        <p><strong>Recetas principales:</strong></p>
+        <ul>
+          <li>Bálsamo de eucalipto y matico.</li>
+          <li>Ungüento de sábila y sangre de grado.</li>
+          <li>Pomada de ajo sacha y chuchuhuasi.</li>
+        </ul>
+        <p><strong>Enfoque:</strong> productos artesanales de uso externo presentados como ideas para kits de bienestar natural.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="galeria">
+  <div class="gallery-intro">
+    <div>
+      <div class="eyebrow">Galería · Herbario visual</div>
+      <h2 class="title">Nueve hojas, nueve historias.</h2>
+    </div>
+    <p class="copy">
+      Las imágenes botánicas de esta galería provienen de Wikimedia Commons. Haz clic en “fuente”
+      para consultar la imagen original.
+    </p>
+  </div>
+
+  <div class="gallery-grid">
+    <article class="plant">
+      <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Hoja_de_matico_(Piper_aduncum).jpg" alt="Matico">
+      <div class="plant-info">
+        <div class="latin">Piper aduncum</div><h3>Matico</h3>
+        <p>Planta de tradición amazónica.</p>
+        <a class="source" href="https://commons.wikimedia.org/wiki/File:Hoja_de_matico_(Piper_aduncum).jpg" target="_blank" rel="noopener">Fuente de imagen ↗</a>
+      </div>
+    </article>
+
+    <article class="plant">
+      <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Hierba_Luisa_(Cymbopogon_citratus).jpg" alt="Hierba Luisa">
+      <div class="plant-info">
+        <div class="latin">Cymbopogon citratus</div><h3>Hierba Luisa</h3>
+        <p>Hierba de hojas aromáticas.</p>
+        <a class="source" href="https://commons.wikimedia.org/wiki/File:Hierba_Luisa_(Cymbopogon_citratus).jpg" target="_blank" rel="noopener">Fuente de imagen ↗</a>
+      </div>
+    </article>
+
+    <article class="plant">
+      <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Sangre_de_grado_(Croton_lechleri)_en_el_jardín_botánico_de_Takiwasi.jpg" alt="Sangre de grado">
+      <div class="plant-info">
+        <div class="latin">Croton lechleri</div><h3>Sangre de grado</h3>
+        <p>Especie emblemática de la Amazonía.</p>
+        <a class="source" href="https://commons.wikimedia.org/wiki/File:Sangre_de_grado_(Croton_lechleri)_en_el_jard%C3%ADn_bot%C3%A1nico_de_Takiwasi.jpg" target="_blank" rel="noopener">Fuente de imagen ↗</a>
+      </div>
+    </article>
+
+    <article class="plant">
+      <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Corteza_y_espina_curva_de_uña_de_gato_(Uncaria_tomentosa).jpg" alt="Uña de gato">
+      <div class="plant-info">
+        <div class="latin">Uncaria tomentosa</div><h3>Uña de gato</h3>
+        <p>Liana de la Amazonía.</p>
+        <a class="source" href="https://commons.wikimedia.org/wiki/File:Corteza_y_espina_curva_de_u%C3%B1a_de_gato_(Uncaria_tomentosa).jpg" target="_blank" rel="noopener">Fuente de imagen ↗</a>
+      </div>
+    </article>
+
+    <article class="plant">
+      <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Muña.jpg" alt="Muña">
+      <div class="plant-info">
+        <div class="latin">Minthostachys mollis</div><h3>Muña</h3>
+        <p>Hierba aromática de tradición andina.</p>
+        <a class="source" href="https://commons.wikimedia.org/wiki/File:Mu%C3%B1a.jpg" target="_blank" rel="noopener">Fuente de imagen ↗</a>
+      </div>
+    </article>
+
+    <article class="plant">
+      <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Sábila_(Aloe_vera).jpg" alt="Sábila">
+      <div class="plant-info">
+        <div class="latin">Aloe vera</div><h3>Sábila</h3>
+        <p>Planta de regiones cálidas.</p>
+        <a class="source" href="https://commons.wikimedia.org/wiki/File:S%C3%A1bila_(Aloe_vera).jpg" target="_blank" rel="noopener">Fuente de imagen ↗</a>
+      </div>
+    </article>
+
+    <article class="plant">
+      <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Planta_de_Ajo_Sacha_(Mansoa_alliacea).jpg" alt="Ajo sacha">
+      <div class="plant-info">
+        <div class="latin">Mansoa alliacea</div><h3>Ajo sacha</h3>
+        <p>Planta de tradición amazónica.</p>
+        <a class="source" href="https://commons.wikimedia.org/wiki/File:Planta_de_Ajo_Sacha_(Mansoa_alliacea).jpg" target="_blank" rel="noopener">Fuente de imagen ↗</a>
+      </div>
+    </article>
+
+    <article class="plant">
+      <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Corteza_de_Chuchuhuasi_(Maytenus_macrocarpa).jpg" alt="Chuchuhuasi">
+      <div class="plant-info">
+        <div class="latin">Maytenus macrocarpa</div><h3>Chuchuhuasi</h3>
+        <p>Árbol de la región amazónica.</p>
+        <a class="source" href="https://commons.wikimedia.org/wiki/File:Corteza_de_Chuchuhuasi_(Maytenus_macrocarpa).jpg" target="_blank" rel="noopener">Fuente de imagen ↗</a>
+      </div>
+    </article>
+
+    <article class="plant">
+      <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Leaves_of_Eucalyptus_verrucata.jpg" alt="Eucalipto">
+      <div class="plant-info">
+        <div class="latin">Eucalyptus</div><h3>Eucalipto</h3>
+        <p>Hojas aromáticas y características.</p>
+        <a class="source" href="https://commons.wikimedia.org/wiki/File:Leaves_of_Eucalyptus_verrucata.jpg" target="_blank" rel="noopener">Fuente de imagen ↗</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="eyebrow">Contacto · Comunidad Healthy Herbs</div>
+  <h2 class="title">Crecer juntos también es aprender.</h2>
+
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h3>Institución</h3>
+      <p><strong>Sagrada Familia Fe y Alegría N° 64</strong></p>
+      <p>Proyecto escolar: <em>Healthy Herbs</em></p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Integrantes</h3>
+      <p>Itzhel Rihanna Delgado Martel</p>
+      <p>Salva Jara Mishell Camila</p>
+      <p>Ariadnny Vidal Romayna Bryanna</p>
+      <p>Marzela Luciana del Águila Shupingahua</p>
+      <p>García Dávila Thiago Romeo</p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Redes sociales</h3>
+      <a class="social" href="https://www.tiktok.com/@healthyherbs.oficial_ept" target="_blank" rel="noopener">TikTok · @healthyherbs.oficial_ept</a>
+      <a class="social" href="https://www.instagram.com/healthyherbs.oficial_ept/" target="_blank" rel="noopener">Instagram · @healthyherbs.oficial_ept</a>
+    </div>
+
+    <div class="contact-card">
+      <h3>Métodos de pago</h3>
+      <p>Si deseas adquirir el álbum:</p>
+      <div class="pills">
+        <span class="pill"><strong>Yape</strong> · 961 383 881</span>
+        <span class="pill"><strong>Plin</strong> · 967 221 414</span>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-title">Healthy Herbs</div>
+      <div class="script">“De la naturaleza, con cariño.”</div>
+      <p class="note">
+        Proyecto educativo. Las recetas y usos tradicionales presentados en el álbum son material
+        informativo y no sustituyen la orientación de profesionales de la salud.
+      </p>
+    </div>
+    <div>
+      <a class="social" href="https://www.tiktok.com/@healthyherbs.oficial_ept" target="_blank" rel="noopener">TikTok</a>
+      <a class="social" href="https://www.instagram.com/healthyherbs.oficial_ept/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  const nav=document.getElementById('nav');
+  const isOpen=nav.dataset.open==='1';
+  nav.dataset.open=isOpen?'0':'1';
+  nav.style.display=isOpen?'':'flex';
+  nav.style.flexDirection='column';
+  nav.style.position='absolute';
+  nav.style.top='65px';
+  nav.style.right='16px';
+  nav.style.padding='16px';
+  nav.style.background='rgba(251,246,233,.97)';
+  nav.style.border='1px solid rgba(35,71,58,.12)';
+  nav.style.borderRadius='16px';
+  nav.style.boxShadow='0 15px 35px rgba(35,71,58,.15)';
+}
+</script>
+</body>
+</html>
